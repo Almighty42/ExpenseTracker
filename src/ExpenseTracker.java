@@ -6,7 +6,7 @@ public class ExpenseTracker {
     public static void main(String[] args) {
 
         // Defines list of expenses
-        ArrayList<Expenses> expenseList = new ArrayList<>();
+        ArrayList<Expenses> expenseList = Expenses.loadExpenses();
         
         // Displays application menu
         ApplicationMenu.showOptions(true);

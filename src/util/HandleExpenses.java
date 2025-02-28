@@ -8,7 +8,7 @@ public class HandleExpenses {
     public static void handleExpenses(int userChoice, ArrayList<Expenses> expenseList, Scanner scanner) {
         if (userChoice == 1) addExpense(expenseList, scanner);
         if (userChoice == 2) deleteExpense();
-        if (userChoice == 3) viewExpenses();
+        if (userChoice == 3) viewExpenses(expenseList);
         if (userChoice == 4) viewSummary();
         if (userChoice == 5) viewSummaryPerMonth();
     }
@@ -45,6 +45,7 @@ public class HandleExpenses {
 
         Expenses expense = new Expenses(expenseDescription, expenseAmount, expenseCategory);
         expenseList.add(expense);
+        Expenses.saveExpense(expense);
 
         ApplicationMenu.clearConsole();
         System.out.println("Expense added to list!");
@@ -59,9 +60,16 @@ public class HandleExpenses {
         // TODO METHOD LOGIC
     }
     
-    static void viewExpenses() {
-        System.out.println("viewExpenses");
-        // TODO METHOD LOGIC
+    static void viewExpenses(ArrayList<Expenses> expenseList) {
+
+        ApplicationMenu.clearConsole();
+
+        System.out.println("# ID  Date       Description  Amount");
+        for (int i = 0; i < expenseList.size(); i++) {
+            Expenses expense = expenseList.get(i);
+            System.out.println("# " + expense.getExpense());
+    }
+
     }
     
     static void viewSummary() {
