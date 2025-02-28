@@ -12,8 +12,8 @@ public class Expenses {
 
     // Constructor
     public Expenses(String description, float amount, String category) {
-        this.uniqueID = UUID.randomUUID().toString(); // Generates a unique ID
-        this.date = new Date(); // Sets the creation date to current date/time
+        this.uniqueID = UUID.randomUUID().toString();
+        this.date = new Date();
         this.description = description;
         this.amount = amount;
         this.category = category;

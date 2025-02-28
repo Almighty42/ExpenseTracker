@@ -5,33 +5,53 @@ import java.util.Scanner;
 
 public class HandleExpenses {
 
-    public static void handleExpenses(int userChoice, ArrayList<Expenses> expenseList) {
-        if (userChoice == 1) addExpense(expenseList);
+    public static void handleExpenses(int userChoice, ArrayList<Expenses> expenseList, Scanner scanner) {
+        if (userChoice == 1) addExpense(expenseList, scanner);
         if (userChoice == 2) deleteExpense();
         if (userChoice == 3) viewExpenses();
         if (userChoice == 4) viewSummary();
         if (userChoice == 5) viewSummaryPerMonth();
     }
 
-    static void addExpense(ArrayList<Expenses> expenseList) {
+    static void addExpense(ArrayList<Expenses> expenseList, Scanner scanner) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        float expenseAmount;
+        String expenseDescription;
+        String expenseCategory;
+
+        ApplicationMenu.clearConsole();
 
         System.out.println("How much money are you spending on this expense? ( In $ )\n");
-        String inputExpenseAmount = scanner.next();
+        while (true) { 
+            String inputExpenseAmount = scanner.next();
 
-        System.out.println(ApplicationInput.isFloat(inputExpenseAmount));
+            if (ApplicationInput.isFloat(inputExpenseAmount)) {
+                expenseAmount = Float.parseFloat(inputExpenseAmount);
+                break;
+            } else {
+                System.out.println("\nInvalid input, try again: \n");
+            }   
+        }
 
-        /*
-        if (CheckInput.checkInput(inputExpenseAmount)) {
-            System.out.println("Example");
-        } else {
-            System.out.println("Oh no");
-        }*/
+        System.out.println("\nWhat would you like to write in the expense description? \n");
 
-        // TODO METHOD LOGIC
+        expenseDescription = scanner.next();
+        scanner.nextLine();
+        
+        System.out.println("\nWhat category is the expense? \n");
+        
+        expenseCategory = scanner.next();
+        scanner.nextLine();
+
+        Expenses expense = new Expenses(expenseDescription, expenseAmount, expenseCategory);
+        expenseList.add(expense);
+
+        ApplicationMenu.clearConsole();
+        System.out.println("Expense added to list!");
+        ApplicationMenu.showOptions(false);
+
+        // TODO Add saving via serialization logic to code...
+
     }
     
     static void deleteExpense() {

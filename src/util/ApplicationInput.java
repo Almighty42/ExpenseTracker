@@ -3,22 +3,15 @@ import java.util.Scanner;
 
 abstract public class ApplicationInput {
 
-    public static int handleOption() {
+    public static int handleOption(Scanner scanner) {
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             String userInput = scanner.next();
 
             // Check if the input is a valid number and within range
             if (isValidOption(userInput)) {
-                scanner.close();
                 return Integer.parseInt(userInput);
             } else {
-                scanner.close();
-                // Clears Console
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-    
-                System.out.println("Invalid input, try again");
+                System.out.println("\nInvalid input, try again");
                 ApplicationMenu.showOptions(false);
             }
         }

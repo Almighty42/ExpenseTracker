@@ -4,8 +4,7 @@ abstract public class ApplicationMenu {
     public static void showOptions(boolean option) {
         // Clears Console
         if (option) {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();            
+            clearConsole();
             System.out.println("--Welcome to the Expense Tracker-- ");
         }
 
@@ -16,6 +15,11 @@ abstract public class ApplicationMenu {
         System.out.println("4 - View summary of all expenses");
         System.out.println("5 - View summary of all expenses for a specific month");
         System.out.println();
+    }
+
+    public static void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();       
     }
 
 }

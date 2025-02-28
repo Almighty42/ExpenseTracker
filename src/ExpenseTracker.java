@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import util.ApplicationInput;
-import util.ApplicationMenu;
-import util.Expenses;
-import util.HandleExpenses;
+import java.util.Scanner;
+import util.*;
 
 public class ExpenseTracker {
     public static void main(String[] args) {
@@ -13,11 +11,17 @@ public class ExpenseTracker {
         // Displays application menu
         ApplicationMenu.showOptions(true);
 
-        // Takes user-input and validates it
-        int userChoice = ApplicationInput.handleOption();
+        // Defines scanner, so that it can be closed in Main
+        Scanner scanner = new Scanner(System.in);
 
-        // Once user-input is validated, starts program
-        HandleExpenses.handleExpenses(userChoice, expenseList);
+        while (true) { 
+            // Takes user-input and validates it
+            int userChoice = ApplicationInput.handleOption(scanner);
+    
+            // Once user-input is validated, starts program
+            HandleExpenses.handleExpenses(userChoice, expenseList, scanner);            
+        }
+
 
     }
 }
