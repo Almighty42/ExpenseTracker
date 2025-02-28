@@ -64,7 +64,7 @@ public class HandleExpenses {
 
         ApplicationMenu.clearConsole();
 
-        System.out.println("# ID  Date       Description  Amount");
+        System.out.println("# ID\t\tDate\t\tDescription\tAmount");
         for (int i = 0; i < expenseList.size(); i++) {
             Expenses expense = expenseList.get(i);
             System.out.println("# " + expense.getExpense());

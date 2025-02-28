@@ -15,6 +15,7 @@ public class ExpenseTracker {
         Scanner scanner = new Scanner(System.in);
 
         while (true) { 
+            // !! When handling option 3, user can still select to add a new expense without even seeing the original screen, NEEDS FIXING
             // Takes user-input and validates it
             int userChoice = ApplicationInput.handleOption(scanner);
     
