@@ -21,11 +21,15 @@ public class HandleExpenses {
 
         System.out.println("How much money are you spending on this expense? ( In $ )\n");
         String inputExpenseAmount = scanner.next();
+
+        System.out.println(ApplicationInput.isFloat(inputExpenseAmount));
+
+        /*
         if (CheckInput.checkInput(inputExpenseAmount)) {
             System.out.println("Example");
         } else {
             System.out.println("Oh no");
-        }
+        }*/
 
         // TODO METHOD LOGIC
     }

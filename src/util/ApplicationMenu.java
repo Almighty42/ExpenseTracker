@@ -1,9 +1,9 @@
 package util;
-abstract public class ShowOptions {
+abstract public class ApplicationMenu {
     
-    public static void showOptions(int option) {
+    public static void showOptions(boolean option) {
         // Clears Console
-        if (option != 1) {
+        if (option) {
             System.out.print("\033[H\033[2J");
             System.out.flush();            
             System.out.println("--Welcome to the Expense Tracker-- ");
