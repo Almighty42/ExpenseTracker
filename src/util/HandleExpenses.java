@@ -13,7 +13,7 @@ public class HandleExpenses {
         if (userChoice == 3)
             viewExpenses(expenseList, scanner);
         if (userChoice == 4)
-            viewSummary();
+            viewSummary(expenseList, scanner);
         if (userChoice == 5)
             viewSummaryPerMonth();
     }
@@ -66,27 +66,16 @@ public class HandleExpenses {
         String deleteExpenseID = scanner.nextLine();
         boolean isExpenseFound = ApplicationInput.handleExpenseDeletion(expenseList, deleteExpenseID);
         if (isExpenseFound) {
-            System.out.println("\nExpense was found and deleted, press any button to continue...\n");
+            System.out.println("\nExpense was found and deleted!");
         } else {
-            System.out.println("\nExpense was not found, press any button to continue...\n");
+            System.out.println("\nExpense was not found.");
         }
-
-        scanner.nextLine();
-
-        ApplicationMenu.clearConsole();
-        ApplicationMenu.showOptions(true);
+        ApplicationMenu.clearCommand(scanner);
     }
 
     static void viewExpenses(ArrayList<Expenses> expenseList, Scanner scanner) {
-
         viewExpensesLoop(expenseList);
-
-        System.out.println("\nPress any button to continue...\n");
-        scanner.nextLine();
-        scanner.nextLine();
-
-        ApplicationMenu.clearConsole();
-        ApplicationMenu.showOptions(true);
+        ApplicationMenu.clearCommand(scanner, true);
     }
 
     static void viewExpensesLoop(ArrayList<Expenses> expenseList) {
@@ -99,9 +88,14 @@ public class HandleExpenses {
         }
     }
 
-    static void viewSummary() {
-        System.out.println("viewSummary");
-        // TODO METHOD LOGIC
+    static void viewSummary(ArrayList<Expenses> expenseList, Scanner scanner) {
+        ApplicationMenu.clearConsole();
+        float totalExpenses = 0;
+        for (int i = 0; i < expenseList.size(); i++) {
+            totalExpenses += expenseList.get(i).getAmount();
+        }
+        System.out.println("Total expenses: " + totalExpenses + "$");
+        ApplicationMenu.clearCommand(scanner, true);
     }
 
     static void viewSummaryPerMonth() {

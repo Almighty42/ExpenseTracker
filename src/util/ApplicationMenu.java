@@ -1,4 +1,7 @@
 package util;
+
+import java.util.Scanner;
+
 abstract public class ApplicationMenu {
     
     public static void showOptions(boolean option) {
@@ -20,6 +23,21 @@ abstract public class ApplicationMenu {
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();       
+    }
+
+    public static void clearCommand(Scanner scanner) {
+        System.out.println("\nPress any button to continue...\n");
+        scanner.nextLine();
+        ApplicationMenu.clearConsole();
+        ApplicationMenu.showOptions(true);
+    }
+
+    public static void clearCommand(Scanner scanner, Boolean nextScanner) {
+        System.out.println("\nPress any button to continue...\n");
+        scanner.nextLine();
+        if (nextScanner) scanner.nextLine();
+        ApplicationMenu.clearConsole();
+        ApplicationMenu.showOptions(true);
     }
 
 }

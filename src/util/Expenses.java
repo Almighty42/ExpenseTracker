@@ -28,7 +28,7 @@ public class Expenses implements Serializable {
         this.category = category;
     }
 
-    // Getters
+    // * Getters
     public String getExpense() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return uniqueID + "\t" + date.format(formatter) + "\t" + description + "\t\t" + "$" + amount;
@@ -37,6 +37,10 @@ public class Expenses implements Serializable {
 
     public String getID() {
         return uniqueID;
+    }
+
+    public float getAmount() {
+        return amount;
     }
 
     public static void saveExpense(Expenses expense) {
