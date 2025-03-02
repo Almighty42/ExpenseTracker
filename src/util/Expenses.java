@@ -28,10 +28,15 @@ public class Expenses implements Serializable {
         this.category = category;
     }
 
-    // Getter
+    // Getters
     public String getExpense() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return uniqueID + "\t" + date.format(formatter) + "\t" + description + "\t" + "$" + amount;
+        return uniqueID + "\t" + date.format(formatter) + "\t" + description + "\t\t" + "$" + amount;
+        // TODO If there are spaces in the string, it doesn't get saved in the whole
+    }
+
+    public String getID() {
+        return uniqueID;
     }
 
     public static void saveExpense(Expenses expense) {
@@ -39,6 +44,18 @@ public class Expenses implements Serializable {
             ArrayList<Expenses> expenseList = loadExpenses();
             expenseList.add(expense);
 
+            FileOutputStream fileOut = new FileOutputStream("ExpenseInfo.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(expenseList);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateExpenses(ArrayList<Expenses> expenseList) {
+        try {
             FileOutputStream fileOut = new FileOutputStream("ExpenseInfo.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(expenseList);
@@ -71,6 +88,6 @@ public class Expenses implements Serializable {
 
     static String generateID() {
         UUID uuid = UUID.randomUUID();
-        return uuid.toString().substring(0, 12);
+        return uuid.toString().substring(0, 8);
     }
 }

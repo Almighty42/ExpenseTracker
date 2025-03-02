@@ -1,4 +1,5 @@
 package util;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 abstract public class ApplicationInput {
@@ -15,6 +16,17 @@ abstract public class ApplicationInput {
                 ApplicationMenu.showOptions(false);
             }
         }
+    }
+
+    public static boolean handleExpenseDeletion(ArrayList<Expenses> expenseList, String expenseID) {
+        for (int i = 0; i < expenseList.size(); i++) {
+            if (expenseList.get(i).getID().equals(expenseID)) {
+                expenseList.remove(i);
+                Expenses.updateExpenses(expenseList);
+                return true;
+            };
+        }
+        return false;
     }
 
     static boolean isValidOption(String userInput) {
