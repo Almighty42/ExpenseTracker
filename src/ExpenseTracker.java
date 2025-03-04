@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import util.*;
+import util.handlers.HandleExpenses;
 
 public class ExpenseTracker {
     public static void main(String[] args) {
@@ -16,7 +17,7 @@ public class ExpenseTracker {
 
         while (true) { 
             // Takes user-input and validates it
-            int userChoice = ApplicationInput.handleOption(scanner);
+            int userChoice = ApplicationInput.handleOption(scanner, 7, true);
     
             // Once user-input is validated, starts program
             HandleExpenses.handleExpenses(userChoice, expenseList, scanner);            

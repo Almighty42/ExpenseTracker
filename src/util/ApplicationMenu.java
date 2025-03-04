@@ -14,9 +14,11 @@ abstract public class ApplicationMenu {
         System.out.println();
         System.out.println("1 - Add an expense");
         System.out.println("2 - Delete an expense");
-        System.out.println("3 - View all expenses");
-        System.out.println("4 - View summary of all expenses");
-        System.out.println("5 - View summary of all expenses for a specific month");
+        System.out.println("3 - Update an expense");
+        System.out.println("4 - View all expenses");
+        System.out.println("5 - View summary of all expenses");
+        System.out.println("6 - View summary of all expenses for a specific month");
+        System.out.println("7 - Exit program");
         System.out.println();
     }
 

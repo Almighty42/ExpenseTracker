@@ -14,12 +14,12 @@ import java.util.UUID;
 public class Expenses implements Serializable {
 
     private final String uniqueID;
-    private final LocalDate date;
-    private final String description;
-    private final float amount;
-    private final String category;
+    private LocalDate date;
+    private String description;
+    private float amount;
+    private String category;
 
-    // Constructor
+    // * Constructor
     public Expenses(String description, float amount, String category) {
         this.uniqueID = generateID();
         this.date = LocalDate.now();
@@ -31,8 +31,28 @@ public class Expenses implements Serializable {
     // * Getters
     public String getExpense() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return uniqueID + "\t" + date.format(formatter) + "\t" + description + "\t\t" + "$" + amount;
-        // TODO If there are spaces in the string, it doesn't get saved in the whole
+    
+        // Define column widths
+        int idWidth = 13;        // Width for ID column
+        int dateWidth = 15;      // Width for Date column
+        int descriptionWidth = 23; // Width for Description column
+        int amountWidth = 10;    // Width for Amount column
+    
+        // Format the expense details with fixed-width columns
+        return String.format(
+            "%-" + idWidth + "s %-" + dateWidth + "s %-" + descriptionWidth + "s %-" + amountWidth + "s",
+            uniqueID,
+            date.format(formatter),
+            truncateDescription(description, descriptionWidth),
+            "$" + amount
+        );
+    }
+
+    private String truncateDescription(String description, int maxWidth) {
+        if (description.length() > maxWidth) {
+            return description.substring(0, maxWidth - 3) + "..."; // Truncate and add ellipsis
+        }
+        return description;
     }
 
     public String getID() {
@@ -42,6 +62,49 @@ public class Expenses implements Serializable {
     public float getAmount() {
         return amount;
     }
+
+    public int getMonth() {
+        String monthName = date.getMonth().toString();
+        switch (monthName) {
+            case "JANUARY":
+                return 1;
+            case "FEBRUARY":
+                return 2;
+            case "MARCH":
+                return 3;
+            case "APRIL":
+                return 4;
+            case "MAY":
+                return 5;
+            case "JUNE":
+                return 6;
+            case "JULY":
+                return 7;
+            case "AUGUST":
+                return 8;
+            case "SEPTEMBER":
+                return 9;
+            case "OCTOBER":
+                return 10;
+            case "NOVEMBER":
+                return 11;
+            case "DECEMBER":
+                return 12;
+            default:
+                throw new IllegalArgumentException("Invalid month name: " + monthName);
+        }
+    }
+
+    // * Setters
+
+    public void setExpense(String description, String category, float amount) {
+        this.date = LocalDate.now();
+        this.description = description;
+        this.category = category;
+        this.amount = amount;
+    }
+
+    // * Serialization / Deserialization
 
     public static void saveExpense(Expenses expense) {
         try {
@@ -89,6 +152,8 @@ public class Expenses implements Serializable {
             return new ArrayList<>();
         }
     }
+
+    // * Helper methods
 
     static String generateID() {
         UUID uuid = UUID.randomUUID();
